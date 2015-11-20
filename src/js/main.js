@@ -10,15 +10,16 @@ require.config({
     ,"paths": {
       "angularjs": "../lib/angular"
       , "lovefield": "../lib/lovefield"
+      , "tabletop": "../lib/tabletop"
     }
 });
 
 require( [
     "angularjs"
     ,"lovefield"
-    ,"./fetch-data"
+    ,"./fetch-sheets-data"
     ,"./data-service"
-  ], function(angular, lovefield, fetchData, dataService) {
+  ], function(angular, lovefield, fetchSheetsData, dataService) {
     var appName = 'myApp'; 
     var app = angular.module(appName, []);
     app.controller(
@@ -31,7 +32,7 @@ require( [
             }
           }
           
-          dataService.init(fetchData.bind(0, $http))
+          dataService.init(fetchSheetsData)
             .then(function(){
               return dataService.getProjects();
             }).then(function(projectList){

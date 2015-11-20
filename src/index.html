@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <link href="css/main.css" rel="stylesheet">
-  <title></title>
+  <title>James Tarling</title>
 </head>
 
 <body ng-controller="appController">
   
-  <ul class="project-list" ng-model="projects">
-    <li ng-repeat="project in projects">
-      <div class="name">{{project.name}}</div>
-      <div class="desc">{{project.description}}</div>
-    </li>
-  </ul>
+  <header>
+    <h1>James Tarling</h1>
+    <h2>Portfolio of work</h2>
+  </header>
+  <main>
+    <ul class="project-list" ng-cloak="true" ng-model="projects">
+      <li ng-repeat="project in projects">
+        <div class="name">{{project.project.name}}</div>
+        <div class="desc">{{project.project.description}}</div>
+      </li>
+    </ul>
+  </main>
+  <footer>
   
+  </footer>
   <!-- build:app-js -->
   <script data-main="js/main.js" src="lib/require.js"></script>
   <!-- endbuild -->

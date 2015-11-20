@@ -19,7 +19,7 @@ define([
 		
 		schemaBuilder.createTable(names.projectImage).
 			addColumn('project', lf.Type.INTEGER).
-			addColumn('image', lf.Type.STRING);
+			addColumn('file', lf.Type.STRING);
 		
 		schemaBuilder.createTable(names.projectType).
 			addColumn('project', lf.Type.INTEGER).
@@ -118,10 +118,22 @@ define([
 	
 	self.getProjects = function() {
 		var p = getTable(names.project);
+		var i = getTable(names.projectImage);
+		return db.select(p.id, p.name, p.description, i.file.as("image")).
+			from(p, i).
+			//innerJoin(i, i.project.eq(p.id)).
+			orderBy(p.startDate, lf.Order.DESC).
+			where(p.id.eq(i.project)).
+			exec();
+	}
+	
+	/*self.getProjects = function() {
+		var p = getTable(names.project);
 		return db.select(p.id, p.name, p.description).
 			from(p).
-			orderBy(p.startDate, lf.Order.DESC).exec();
-	}
+			orderBy(p.startDate, lf.Order.DESC).
+			exec();
+	}*/
 	
 	return self;
 	
