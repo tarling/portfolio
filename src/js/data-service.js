@@ -17,20 +17,24 @@ define([
 			addColumn('name', lf.Type.STRING).
 			addPrimaryKey(['id']);
 		
-		schemaBuilder.createTable(names.image).
-			addColumn('id', lf.Type.INTEGER).
-			addColumn('file', lf.Type.STRING).
-			addPrimaryKey(['id']);
+		schemaBuilder.createTable(names.projectImage).
+			addColumn('project', lf.Type.INTEGER).
+			addColumn('image', lf.Type.STRING);
+		
+		schemaBuilder.createTable(names.projectType).
+			addColumn('project', lf.Type.INTEGER).
+			addColumn('type', lf.Type.INTEGER);
+		
+		schemaBuilder.createTable(names.projectTechnology).
+			addColumn('project', lf.Type.INTEGER).
+			addColumn('technology', lf.Type.INTEGER);
 		
 		schemaBuilder.createTable(names.project).
 			addColumn('id', lf.Type.INTEGER).
 			addColumn('name', lf.Type.STRING).
 			addColumn('description', lf.Type.STRING).
-			addColumn(names.technology, lf.Type.STRING).
 			addColumn(names.role, lf.Type.STRING).
-			addColumn(names.type, lf.Type.STRING).
 			addColumn(names.client, lf.Type.STRING).
-			addColumn(names.image, lf.Type.STRING).
 			addColumn(names.agency, lf.Type.STRING).
 			addColumn('startDate', lf.Type.DATE_TIME).
 			addColumn('endDate', lf.Type.DATE_TIME).
