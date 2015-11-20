@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <title></title>
 </head>
 
 <body ng-controller="appController">
   
-  <ul ng-model="projects">
+  <ul class="project-list" ng-model="projects">
     <li ng-repeat="project in projects">
-      <div>{{project.name}}</div>
-      <div>{{project.description}}</div>
+      <div class="name">{{project.name}}</div>
+      <div class="desc">{{project.description}}</div>
     </li>
   </ul>
   

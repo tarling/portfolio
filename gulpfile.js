@@ -1,7 +1,13 @@
 var gulp = require('gulp'),
-    rjs = require('gulp-requirejs');
+    rjs = require('gulp-requirejs'),
+    sass = require('gulp-sass');
 
-gulp.task('default', function() {
+var src = "./src/";
+var copyOptions = {
+  base: src
+}
+
+gulp.task('default', ['copy', 'sass', 'watch'], function() {
   // place code for your default task here
 });
 
@@ -18,12 +24,33 @@ gulp.task('rjs', function(cb) {
     cb();
 });
 
+gulp.task('copy', ['copy-html', 'copy-js', 'copy-lib'], function() {
+  
+});
+
 gulp.task('copy-html', function() {
-  gulp.src('./app/index.html')
-    .pipe(htmlreplace({
-      'blockly-js': 'blockly-min.js',
-      'app-js': 'app.js',
-      'test-meta': '',
-    }))
-    .pipe(gulp.dest(tempPath + 'app/'));
+  gulp.src('./src/index.html', copyOptions)
+    .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('copy-js', function() {
+  gulp.src('./src/js/**/*', copyOptions)
+    .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('copy-lib', function() {
+  gulp.src('./src/lib/**/*', copyOptions)
+    .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('sass', function () {
+  gulp.src('./src/sass/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./build/css'));
+});
+
+gulp.task('watch', function () {
+  gulp.watch('./src/sass/**/*.scss', ['sass']);
+  gulp.watch('./src/js/**', ['copy-js']);
+  gulp.watch('./src/index.html', ['copy-html']);
 });
