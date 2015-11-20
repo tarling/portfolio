@@ -6,7 +6,12 @@
 
 <body ng-controller="appController">
   
-  
+  <ul ng-model="projects">
+    <li ng-repeat="project in projects">
+      <div>{{project.name}}</div>
+      <div>{{project.description}}</div>
+    </li>
+  </ul>
   
   <!-- build:app-js -->
   <script data-main="js/main.js" src="lib/require.js"></script>

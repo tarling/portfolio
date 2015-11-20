@@ -16,19 +16,29 @@ require.config({
 require( [
     "angularjs"
     ,"lovefield"
-    ,"fetch-data"
-  ], function(angular, lovefield, fetchData) {
-    console.log("angularjs", angular);
-    console.log("lovefield", lovefield);
-    
+    ,"./fetch-data"
+    ,"./data-service"
+  ], function(angular, lovefield, fetchData, dataService) {
     var appName = 'myApp'; 
     var app = angular.module(appName, []);
     app.controller(
         'appController',
         ['$scope', '$http', function($scope, $http){
-          fetchData($http).then(function(data){
-            console.log("data", data);
-          });
+          
+          function update() {
+            if(!$scope.$$phase) {
+              $scope.$apply();
+            }
+          }
+          
+          dataService.init(fetchData.bind(0, $http))
+            .then(function(){
+              return dataService.getProjects();
+            }).then(function(projectList){
+              console.log("projectList", projectList);
+              $scope.projects = projectList;
+              update();
+            });
         }]);
         
     angular.bootstrap(document, [appName]);
