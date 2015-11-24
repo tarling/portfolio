@@ -71,14 +71,27 @@ define([
 	}
 	
 	function insertData(tablesData) {
-		var queries = tablesData.map(function(tableData){
-			
-			var table = getTable(tableData.name);
-			var rows = tableData.data.map(function(rowData){
+		
+		var tableName, table;
+		function makeRow(rowData){
+			return table.createRow(rowData)
+		}
+		function makeProjectRow(rowData) {
+			if (tableName == "project")
+			{
 				rowData.endDate = new Date(rowData.endDate);
 				rowData.startDate = new Date(rowData.startDate);
-				return table.createRow(rowData);
-			});
+			}
+			return makeRow(rowData);
+		}
+			
+		var queries = tablesData.map(function(tableData){
+			
+			tableName = tableData.name;
+			table = getTable(tableName);
+			
+			var mapFn = (tableName == "project") ? makeProjectRow : makeRow;
+			var rows = tableData.data.map(mapFn);
 			return db.
 				insert().
 				into(table).
