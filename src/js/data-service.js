@@ -79,8 +79,8 @@ define([
 		function makeProjectRow(rowData) {
 			if (tableName == "project")
 			{
-				rowData.endDate = new Date(rowData.endDate);
 				rowData.startDate = new Date(rowData.startDate);
+				rowData.endDate = new Date(rowData.endDate ? rowData.endDate : 0);
 			}
 			return makeRow(rowData);
 		}
@@ -132,7 +132,7 @@ define([
 	self.getProjects = function() {
 		var p = getTable(names.project);
 		var i = getTable(names.projectImage);
-		return db.select(p.id, p.name, p.description, i.file.as("image")).
+		return db.select(p.id, p.name, p.description, p.startDate, p.endDate, i.file.as("image")).
 			from(p, i).
 			//innerJoin(i, i.project.eq(p.id)).
 			orderBy(p.startDate, lf.Order.DESC).

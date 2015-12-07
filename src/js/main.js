@@ -32,6 +32,10 @@ require( [
             }
           }
           
+          $scope.isNullDate = function(d) {
+            return d.valueOf() == 0;
+          }
+          
           dataService.init(fetchSheetsData)
             .then(function(){
               return dataService.getProjects();
