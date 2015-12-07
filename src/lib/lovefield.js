@@ -7431,7 +7431,7 @@ lf.fn.StarColumn.prototype.isNullable = function() {
   return !1;
 };
 
-lf.fn.Type = {AVG:"AVG", COUNT:"COUNT", DISTINCT:"DISTINCT", GEOMEAN:"GEOMEAN", MAX:"MAX", MIN:"MIN", STDDEV:"STDDEV", SUM:"SUM"};
+lf.fn.Type = {AVG:"AVG", COUNT:"COUNT", DISTINCT:"DISTINCT", GEOMEAN:"GEOMEAN", MAX:"MAX", MIN:"MIN", STDDEV:"STDDEV", SUM:"SUM", CONCAT:"CONCAT", AS_ARRAY:"AS_ARRAY"};
 lf.fn.avg = function(col) {
   return new lf.fn.AggregatedColumn(col, lf.fn.Type.AVG);
 };
@@ -7465,6 +7465,14 @@ lf.fn.geomean = function(col) {
   return new lf.fn.AggregatedColumn(col, lf.fn.Type.GEOMEAN);
 };
 goog.exportSymbol("lf.fn.geomean", lf.fn.geomean);
+lf.fn.concat = function(col) {
+  return new lf.fn.AggregatedColumn(col, lf.fn.Type.CONCAT);
+};
+goog.exportSymbol("lf.fn.concat", lf.fn.concat);
+lf.fn.asArray = function(col) {
+  return new lf.fn.AggregatedColumn(col, lf.fn.Type.AS_ARRAY);
+};
+goog.exportSymbol("lf.fn.asArray", lf.fn.asArray);
 
 lf.proc.PhysicalQueryPlanNode = function(numRelations, type) {
   goog.structs.TreeNode.call(this, "", "");
@@ -7580,6 +7588,12 @@ lf.proc.AggregationStep.Calculator_.evalAggregation_ = function(aggregatorType, 
     case lf.fn.Type.GEOMEAN:
       result = Calculator.geomean_(relation, column);
       break;
+    case lf.fn.Type.CONCAT:
+      result = Calculator.concat_(relation, column);
+      break;
+    case lf.fn.Type.AS_ARRAY:
+      result = Calculator.asArray_(relation, column);
+      break;
     default:
       result = Calculator.stddev_(relation, column);
   }
@@ -7630,6 +7644,18 @@ lf.proc.AggregationStep.Calculator_.distinct_ = function(relation, column) {
     distinctMap.set(value, entry);
   });
   return new lf.proc.Relation(distinctMap.getValues(), relation.getTables());
+};
+            
+lf.proc.AggregationStep.Calculator_.concat_ = function(relation, column) {
+  return relation.entries.reduce(function(soFar, entry, index) {
+    var out = soFar + "," + entry.getField(column);
+    if (index == 0) out = out.substr(1);
+    return out;
+  }, "");
+};
+            
+lf.proc.AggregationStep.Calculator_.asArray_ = function(relation, column) {
+  return relation.entries.map(function(entry){return entry.getField(column)});
 };
 
 lf.proc.LogicalQueryPlanNode = function() {
@@ -8290,7 +8316,7 @@ lf.query.SelectBuilder.prototype.checkGroupByColumns_ = function() {
     var groupByColumns = this.query.groupBy.map(function(column) {
       return column.getNormalizedName();
     });
-    (isInvalid = nonAggregatedColumns.some(function(column) {
+    (isInvalid = nonAggregatedColumns.every(function(column) {
       return -1 == groupByColumns.indexOf(column);
     })) || (isInvalid = this.query.groupBy.some(function(column) {
       var type = column.getType();
@@ -8410,6 +8436,10 @@ lf.query.SelectBuilder.isAggregationValid_ = function(aggregatorType, columnType
     ;
     case lf.fn.Type.MIN:
       return columnType == lf.Type.NUMBER || columnType == lf.Type.INTEGER || columnType == lf.Type.STRING || columnType == lf.Type.DATE_TIME;
+    case lf.fn.Type.CONCAT:
+      return columnType == lf.Type.STRING;
+    case lf.fn.Type.AS_ARRAY:
+      return !0;
   }
   return !1;
 };
@@ -10447,5 +10477,5 @@ lf.structs.MapPolyFill_.prototype.values = function() {
   return this.map_.getValueIterator();
 };
 goog.exportSymbol("lf.structs.MapPolyFill_.prototype.values", lf.structs.MapPolyFill_.prototype.values);
-lf.structs.Map = goog.isDef(window.Map) && goog.isDef(window.Map.prototype.keys) ? window.Map : lf.structs.MapPolyFill_;
+lf.structs.Map = goog.isDef(window.Map) && goog.isDef(window.Map.prototype.keys) ? window.Map : lf.structs.MapPolyFill_;           
 }.bind(window))()

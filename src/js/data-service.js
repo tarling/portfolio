@@ -131,13 +131,35 @@ define([
 	
 	self.getProjects = function() {
 		var p = getTable(names.project);
-		var i = getTable(names.projectImage);
-		return db.select(p.id, p.name, p.description, p.startDate, p.endDate, i.file.as("image")).
-			from(p, i).
-			//innerJoin(i, i.project.eq(p.id)).
+		var pi = getTable(names.projectImage);
+		var ptech = getTable(names.projectTechnology);
+		//var type = getTable(names.projectType);
+		var client = getTable(names.client);
+		var agency = getTable(names.agency);
+        var tech = getTable(names.technology);
+		return db.select(
+            p.id, 
+            p.name, 
+            p.description, 
+            p.startDate, 
+            p.endDate, 
+            pi.file.as("image"), 
+            client.name.as("clientName"), 
+            agency.name.as("agencyName"),
+            //ptech.technology.as("technologyId")).
+            lf.fn.concat(tech.name).as("technologies")).
+            //tech.name.as("technology")).
+			//ptech.technology).
+			//from(p, i, tech, type, client, agency).
+			from(p, pi).
+			innerJoin(client, client.id.eq(p.client)).
+			innerJoin(agency, agency.id.eq(p.agency)).
+			innerJoin(ptech, ptech.project.eq(p.id)).
+			innerJoin(tech, tech.id.eq(ptech.technology)).
 			orderBy(p.startDate, lf.Order.DESC).
-			where(p.id.eq(i.project)).
-			exec();
+			where(p.id.eq(pi.project)).
+            groupBy(p.id).
+            exec();
 	}
 	
 	/*self.getProjects = function() {
