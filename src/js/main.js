@@ -9,7 +9,7 @@ require.config({
     }
     ,"paths": {
       "angularjs": "../lib/angular"
-      , "lovefield": "../lib/lovefield"
+      , "lovefield": "../lib/lf"
       , "tabletop": "../lib/tabletop"
     }
 });
