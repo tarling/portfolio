@@ -19,7 +19,7 @@ define([
 		
 		schemaBuilder.createTable(names.projectImage).
 			addColumn('project', lf.Type.INTEGER).
-			addColumn('file', lf.Type.STRING);
+			addColumn('image', lf.Type.STRING);
 		
 		schemaBuilder.createTable(names.projectType).
 			addColumn('project', lf.Type.INTEGER).
@@ -131,44 +131,39 @@ define([
 	
 	self.getProjects = function() {
 		var p = getTable(names.project);
-		var pi = getTable(names.projectImage);
+		
+        var pi = getTable(names.projectImage);
 		var ptech = getTable(names.projectTechnology);
-		//var type = getTable(names.projectType);
-		var client = getTable(names.client);
+		var ptype = getTable(names.projectType);
+		
+        var client = getTable(names.client);
 		var agency = getTable(names.agency);
         var tech = getTable(names.technology);
+		var type = getTable(names.type);
+        
 		return db.select(
             p.id, 
             p.name, 
             p.description, 
             p.startDate, 
             p.endDate, 
-            pi.file.as("image"), 
+            pi.image.as("image"), 
             client.name.as("clientName"), 
             agency.name.as("agencyName"),
-            //ptech.technology.as("technologyId")).
-            lf.fn.concat(tech.name).as("technologies")).
-            //tech.name.as("technology")).
-			//ptech.technology).
-			//from(p, i, tech, type, client, agency).
-			from(p, pi).
+            lf.fn.asArray(tech.name).as("technologies"),
+            lf.fn.asArray(type.name).as("types")).
+            from(p, pi).
 			innerJoin(client, client.id.eq(p.client)).
 			innerJoin(agency, agency.id.eq(p.agency)).
 			innerJoin(ptech, ptech.project.eq(p.id)).
+			innerJoin(ptype, ptype.project.eq(p.id)).
 			innerJoin(tech, tech.id.eq(ptech.technology)).
+			innerJoin(type, type.id.eq(ptype.type)).
 			orderBy(p.startDate, lf.Order.DESC).
 			where(p.id.eq(pi.project)).
             groupBy(p.id).
             exec();
 	}
-	
-	/*self.getProjects = function() {
-		var p = getTable(names.project);
-		return db.select(p.id, p.name, p.description).
-			from(p).
-			orderBy(p.startDate, lf.Order.DESC).
-			exec();
-	}*/
 	
 	return self;
 	

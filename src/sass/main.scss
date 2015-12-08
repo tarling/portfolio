@@ -24,7 +24,7 @@ body {
 	
 	ul.project-list {
 		padding-left: $left-margin;
-		li {
+		> li {
 			display: inline-block;
 			width: 200px;
 			margin: 20px;
@@ -42,11 +42,35 @@ body {
 			
 			.desc {
 				font-weight: 100;
+                margin-bottom: 10px;
 			}
 			
 			.dates {
 				margin-top: 1em;
 			}
+            
+            ul {
+                list-style: none; 
+                padding-left: 0;
+                li {
+                    display: inline-block;
+                    padding: 3px;
+                    border: 1px solid #dddddd;
+                    margin-right: 0.2em;
+                }
+            }
+            
+            ul.tech {
+                margin-bottom: 0.5em;
+                li {
+                    border-radius: 8px;
+                    background-color: #cccccc;
+                }
+            }
+            
+            ul.type {
+                  
+            }
 		}
 	}
 	

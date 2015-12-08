@@ -18,6 +18,16 @@
       <li ng-repeat="project in projects">
         <div class="name">{{project.project.name}}</div>
         <div class="desc">{{project.project.description}}</div>
+        <ul class="tech">
+            <li ng-repeat="tech in project.technologies">
+                {{tech}}
+            </li>
+        </ul>
+        <ul class="type">
+            <li ng-repeat="type in project.types">
+                {{type}}
+            </li>
+        </ul>
         <div class="dates">
           <span class="date-from">{{project.project.startDate | date: 'MMM yy'}}</span>
           <span class="date-span" ng-hide="isNullDate(project.project.endDate)">
