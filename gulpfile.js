@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     rjs = require('gulp-requirejs'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    importData = require('./tools/import-data/main');
 
 var src = "./src/";
 var copyOptions = {
@@ -9,6 +10,10 @@ var copyOptions = {
 
 gulp.task('default', ['copy', 'sass', 'watch'], function() {
   // place code for your default task here
+});
+
+gulp.task('importData', function(){
+    importData("./json/project.json");
 });
 
 gulp.task('rjs', function(cb) {
