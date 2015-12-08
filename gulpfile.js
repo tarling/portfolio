@@ -13,7 +13,7 @@ gulp.task('default', ['copy', 'sass', 'watch'], function() {
 });
 
 gulp.task('importData', function(){
-    importData("./json/project.json");
+    importData("./json/projects.json");
 });
 
 gulp.task('rjs', function(cb) {

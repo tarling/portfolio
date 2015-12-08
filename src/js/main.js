@@ -2,24 +2,16 @@ require.config({
     "shim" : {
         "angularjs" : {
           exports: "angular"
-        },
-        "lovefield" : {
-          exports: "lf"
         }
     }
     ,"paths": {
       "angularjs": "../lib/angular"
-      , "lovefield": "../lib/lf"
-      , "tabletop": "../lib/tabletop"
     }
 });
 
 require( [
     "angularjs"
-    ,"lovefield"
-    ,"./fetch-sheets-data"
-    ,"./data-service"
-  ], function(angular, lovefield, fetchSheetsData, dataService) {
+  ], function(angular) {
     var appName = 'myApp'; 
     var app = angular.module(appName, []);
     app.controller(
@@ -36,14 +28,16 @@ require( [
             return d.valueOf() == 0;
           }
           
-          dataService.init(fetchSheetsData)
-            .then(function(){
-              return dataService.getProjects();
-            }).then(function(projectList){
-              console.log("projectList", projectList);
-              $scope.projects = projectList;
-              update();
+          $http.get('json/projects.json').then(function(response){
+            $scope.projects = response.data.map(function(item){
+                item.startDate = new Date(item.startDate);
+				item.endDate = new Date(item.endDate ? item.endDate : 0);
+                return item;
             });
+            update();
+          });
+          
+          
         }]);
         
     angular.bootstrap(document, [appName]);
