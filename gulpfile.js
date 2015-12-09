@@ -12,8 +12,10 @@ gulp.task('default', ['copy', 'sass', 'watch'], function() {
   // place code for your default task here
 });
 
-gulp.task('importData', function(){
-    importData("./json/projects.json");
+gulp.task('importData', function(cb){
+    importData("./build/json/projects.json").then(function(){
+        cb();
+    });
 });
 
 gulp.task('rjs', function(cb) {

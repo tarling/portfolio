@@ -6,7 +6,7 @@ var export2Json = require('./export-to-json');
 
 module.exports = function(filePath){
 
-    fetchSheetsData()
+    return fetchSheetsData()
         .then(function(tableData){
             return import2DB(tableData);
         }).then(function(db){

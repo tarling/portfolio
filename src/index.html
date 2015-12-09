@@ -28,6 +28,8 @@
                 {{type}}
             </li>
         </ul>
+        <div class="client">for {{project.clientName}}</div>
+        <div class="agency">with {{project.agencyName}}</div>
         <div class="dates">
           <span class="date-from">{{project.project.startDate | date: 'MMM yy'}}</span>
           <span class="date-span" ng-hide="isNullDate(project.project.endDate)">

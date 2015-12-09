@@ -22,6 +22,7 @@ module.exports = function(db_) {
     var tech = getTable(names.technology);
     var type = getTable(names.type);
     
+    try {
     var query = db.select(
         p.id, 
         p.name, 
@@ -41,8 +42,12 @@ module.exports = function(db_) {
         innerJoin(tech, tech.id.eq(ptech.technology)).
         innerJoin(type, type.id.eq(ptype.type)).
         innerJoin(pi, pi.project.eq(p.id)).
+        where(p.show.eq(true)).
         orderBy(p.startDate, lf.Order.DESC).
         groupBy(p.id);
+    } catch(e) {
+        console.error(e);
+    }
     
     
     return query.exec();

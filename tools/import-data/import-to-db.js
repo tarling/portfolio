@@ -36,6 +36,7 @@ function buildSchema() {
         addColumn(names.agency, lf.Type.STRING).
         addColumn('startDate', lf.Type.DATE_TIME).
         addColumn('endDate', lf.Type.DATE_TIME).
+        addColumn('show', lf.Type.BOOLEAN).
         addPrimaryKey(['id']);
 
     schemaBuilder.createTable(names.role).
@@ -71,6 +72,7 @@ function insertData(tablesData) {
         {
             rowData.startDate = new Date(rowData.startDate);
             rowData.endDate = new Date(rowData.endDate ? rowData.endDate : 0);
+            rowData.show = rowData.show == "1";
         }
         return makeRow(rowData);
     }
