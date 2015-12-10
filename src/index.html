@@ -16,6 +16,9 @@
   <main>
     <ul class="project-list" ng-cloak="true" ng-model="projects">
       <li ng-repeat="project in projects">
+        <div class="img">
+            <img ng-src="thumbnails/{{project.images[0]}}.jpg">
+        </div>
         <div class="name">{{project.project.name}}</div>
         <div class="desc">{{project.project.description}}</div>
         <ul class="tech">
@@ -28,8 +31,8 @@
                 {{type}}
             </li>
         </ul>
-        <div class="client">for {{project.clientName}}</div>
-        <div class="agency">with {{project.agencyName}}</div>
+        <div class="client" ng-show="project.clientId > 0">for {{project.clientName}}</div>
+        <div class="agency">{{project.clientId == "0" ? "for" : "with"}} {{project.agencyName}}</div>
         <div class="dates">
           <span class="date-from">{{project.project.startDate | date: 'MMM yy'}}</span>
           <span class="date-span" ng-hide="isNullDate(project.project.endDate)">

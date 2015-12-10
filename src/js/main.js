@@ -25,15 +25,17 @@ require( [
           }
           
           $scope.isNullDate = function(d) {
+            console.log("isNullDate", d, d.valueOf(), d.valueOf() == 0);
             return d.valueOf() == 0;
           }
           
           $http.get('json/projects.json').then(function(response){
             $scope.projects = response.data.map(function(item){
-                item.startDate = new Date(item.startDate);
-				item.endDate = new Date(item.endDate ? item.endDate : 0);
+                item.project.startDate = new Date(item.project.startDate);
+				item.project.endDate = new Date(item.project.endDate);
                 return item;
             });
+            console.log("projects", $scope.projects);
             update();
           });
           

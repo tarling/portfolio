@@ -29,6 +29,7 @@ module.exports = function(db_) {
         p.description, 
         p.startDate, 
         p.endDate,
+        client.id.as("clientId"),
         client.name.as("clientName"),
         agency.name.as("agencyName"),
         lf.fn.asArray(pi.image).as("images"),

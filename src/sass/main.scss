@@ -26,9 +26,8 @@ body {
 		padding-left: $left-margin;
 		> li {
 			display: inline-block;
-			width: 200px;
-			margin: 20px;
-			min-height: 200px;
+			width: 280px;
+			margin: 10px;
 			
 			background-color: #FFFFFF;
 			padding: 20px;
@@ -36,9 +35,11 @@ body {
 			
 			.name {
 				font-weight: bold;
-				height: 0;
-    			margin-bottom: 50%;
 			}
+            
+            .img {
+                margin-bottom: 10px;    
+            }
 			
 			.desc {
 				font-weight: 100;
@@ -78,7 +79,7 @@ body {
             }
             
             ul.type {
-                  
+              margin-bottom: 0.5em;    
             }
 		}
 	}
