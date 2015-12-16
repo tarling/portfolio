@@ -12,8 +12,10 @@
   <header>
     <h1>James Tarling</h1>
     <h2>Portfolio of work</h2>
-    <!--<div class="filter-menu" ng-dropdown-multiselect="" options="technologies" selected-model="selectedTechs" extra-settings="filterOptions" translation-texts="techFilterTexts"></div>
-    <div class="filter-menu" ng-dropdown-multiselect="" options="types" selected-model="selectedTypes" extra-settings="filterOptions" translation-texts="typeFilterTexts"></div>-->
+    <div class="filters" ng-controller="filtersController">
+        <div class="filter-menu" ng-dropdown-multiselect="" options="technologies" selected-model="selectedTechs" extra-settings="filterOptions" translation-texts="techFilterTexts"></div>
+        <div class="filter-menu" ng-dropdown-multiselect="" options="types" selected-model="selectedTypes" extra-settings="filterOptions" translation-texts="typeFilterTexts"></div>
+    </div>
   </header>
   <main>
     <section class="filters">
@@ -32,7 +34,7 @@
     </section>  
     <section class="list"> 
     <!--<ul class="project-list" ng-cloak="true" ng-value="projects | filter: {technologies: listFilters.techs}">-->
-    <ul class="project-list" ng-cloak="true" ng-value="projects">
+    <ul class="project-list" ng-controller="listController" ng-cloak="true" ng-value="projects">
       <li ng-repeat="project in projects">
         <div class="img">
             <img ng-src="thumbnails/{{project.images[0]}}.jpg">
