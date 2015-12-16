@@ -40,30 +40,32 @@ define([
               
             update();
           });
+            
+            $scope.selectedTechs = [];
+            $scope.selectedTypes = [];
+            $scope.projects = [];
           
           
-        }]);
+    }]);
     
     app.controller(
 		"filtersController",
 		['$scope', function($scope){
 	
-        $scope.selectedTechs = [];
-        $scope.selectedTypes = [];
-        $scope.filterOptions = {displayProp: 'name', dynamicTitle: false};
+        $scope.filterOptions = {displayProp: 'name', dynamicTitle: false, idProp: 'name', scrollable: true};
 
         $scope.techFilterTexts = {buttonDefaultText: 'Technologies'};
         $scope.typeFilterTexts = {buttonDefaultText: 'Types'};
             
         $scope.$on(constants.READY, function(){
-            $scope.selectedTechs = $scope.technologies.map(function(item){return {id:item.id}});
-            $scope.selectedTypes = $scope.types.map(function(item){return {id:item.id}});
+            $scope.$parent.selectedTechs = $scope.technologies.map(function(item){return {id:item.name}});
+            $scope.$parent.selectedTypes = $scope.types.map(function(item){return {id:item.name}});
             
-            console.log("$scope.selectedTechs", $scope.selectedTechs);
-            console.log("$scope.selectedTypes", $scope.selectedTypes);
+            console.log("$scope.selectedTechs", $scope.$parent.selectedTechs);
+            console.log("$scope.selectedTypes", $scope.$parent.selectedTypes);
         });
 		
-        }]);
+    }]);
     
     
     app.controller(
@@ -77,7 +79,7 @@ define([
           
           
             
-		}]);
+    }]);
     
     
 });

@@ -19,6 +19,7 @@ require( [
     ,"./app"
     ,"./constants"
     ,"./controllers"
+    ,"./filters"
     ,"lodash"
   ], function(angular, app, constants) {
         
