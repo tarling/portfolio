@@ -47,11 +47,13 @@ function buildSchema() {
     schemaBuilder.createTable(names.technology).
         addColumn('id', lf.Type.INTEGER).
         addColumn('name', lf.Type.STRING).
+        addColumn('order', lf.Type.INTEGER).
         addPrimaryKey(['id']);
 
     schemaBuilder.createTable(names.type).
         addColumn('id', lf.Type.INTEGER).
         addColumn('name', lf.Type.STRING).
+        addColumn('order', lf.Type.INTEGER).
         addPrimaryKey(['id']);
     
     return schemaBuilder;

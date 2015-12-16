@@ -12,9 +12,27 @@
   <header>
     <h1>James Tarling</h1>
     <h2>Portfolio of work</h2>
+    <!--<div class="filter-menu" ng-dropdown-multiselect="" options="technologies" selected-model="selectedTechs" extra-settings="filterOptions" translation-texts="techFilterTexts"></div>
+    <div class="filter-menu" ng-dropdown-multiselect="" options="types" selected-model="selectedTypes" extra-settings="filterOptions" translation-texts="typeFilterTexts"></div>-->
   </header>
   <main>
-    <ul class="project-list" ng-cloak="true" ng-model="projects">
+    <section class="filters">
+        <form>
+            <!--<div class="form-group">
+                <span ng-repeat="tech in technologies">
+                <label for="{{tech.id}}">
+                    <input name="techs" id="{{tech.id}}" ng-model="listFilters.techs[tech.id]" type="checkbox" ng-true-value="'{{tech.name}}'" ng-false-value="''">
+                    {{tech.name}}
+                </label>
+                    </span>
+            </div>-->
+            
+        </form>
+      
+    </section>  
+    <section class="list"> 
+    <!--<ul class="project-list" ng-cloak="true" ng-value="projects | filter: {technologies: listFilters.techs}">-->
+    <ul class="project-list" ng-cloak="true" ng-value="projects">
       <li ng-repeat="project in projects">
         <div class="img">
             <img ng-src="thumbnails/{{project.images[0]}}.jpg">
@@ -41,6 +59,7 @@
         </div>
       </li>
     </ul>
+    </section>  
   </main>
   <footer>
   
