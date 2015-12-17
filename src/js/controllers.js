@@ -76,6 +76,25 @@ define([
             //console.log("isNullDate", d, d.valueOf(), d.valueOf() == 0);
             return d.valueOf() == 0;
         }
+        
+        var OPENED_CLASS = "opened";
+        
+        $scope.expand = function(e) {
+            var domEl = e.currentTarget;
+            var el = angular.element(domEl);
+            
+            var has = el.hasClass(OPENED_CLASS);
+            el.parent().find("li").removeClass(OPENED_CLASS);
+            if (!has)
+            {
+                el.addClass(OPENED_CLASS);
+             
+                var fullImg = el.find(".full");
+                fullImg.attr("src", fullImg.attr("data-src"));
+                
+                domEl.scrollIntoView({behavior: "smooth"});
+            }
+        }
           
           
             

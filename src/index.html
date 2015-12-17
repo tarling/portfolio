@@ -18,57 +18,44 @@
     </div>
   </header>
   <main>
-    <section class="filters">
-        <form>
-            <!--<div class="form-group">
-                <span ng-repeat="tech in technologies">
-                <label for="{{tech.id}}">
-                    <input name="techs" id="{{tech.id}}" ng-model="listFilters.techs[tech.id]" type="checkbox" ng-true-value="'{{tech.name}}'" ng-false-value="''">
-                    {{tech.name}}
-                </label>
-                    </span>
-            </div>-->
-            
-        </form>
-      
-    </section>  
-    <section class="list"> 
-    <ul class="project-list" ng-show="projects.length">
-    <!--<ul class="project-list" ng-cloak="true" ng-value="projects | filterBySelection: selectedTechs : selectedTypes">-->
-    <!--<ul class="project-list" ng-controller="listController" ng-cloak="true" ng-value="projects">-->
-      <li ng-repeat="project in projects | filterBySelection: selectedTechs : selectedTypes">
+    <ul ng-controller="listController" class="project-list" ng-show="projects.length">
+       <li ng-repeat="project in projects | filterBySelection: selectedTechs : selectedTypes" ng-click="expand($event)">
         <div class="img">
-            <img ng-src="thumbnails/{{project.images[0]}}.jpg">
+            <img class="thumb" ng-src="thumbnails/{{project.images[0]}}.jpg">
+            <img class="full" data-src="images/{{project.images[0]}}.png">
         </div>
-        <div class="name">{{project.project.name}}</div>
-        <div class="desc">{{project.project.description}}</div>
-        <ul class="tech">
-            <li ng-repeat="tech in project.technologies">
-                {{tech}}
-            </li>
-        </ul>
-        <ul class="type">
-            <li ng-repeat="type in project.types">
-                {{type}}
-            </li>
-        </ul>
-        <div class="client" ng-show="project.clientId > 0">for {{project.clientName}}</div>
-        <div class="agency">{{project.clientId == "0" ? "for" : "with"}} {{project.agencyName}}</div>
-        <div class="dates">
-          <span class="date-from">{{project.project.startDate | date: 'MMM yy'}}</span>
-          <span class="date-span" ng-hide="isNullDate(project.project.endDate)">
-            - <span class="date-from">{{project.project.endDate | date: 'MMM yy'}}</span>
-          </span>
+        <div class="info">
+            <div class="name">{{project.project.name}}</div>
+            <div class="meta">
+                <div class="desc">{{project.project.description}}</div>
+                <ul class="tech">
+                    <li ng-repeat="tech in project.technologies">
+                        {{tech}}
+                    </li>
+                </ul>
+                <ul class="type">
+                    <li ng-repeat="type in project.types">
+                        {{type}}
+                    </li>
+                </ul>
+                <div class="client" ng-show="project.clientId > 0">for {{project.clientName}}</div>
+                <div class="agency">{{project.clientId == "0" ? "for" : "with"}} {{project.agencyName}}</div>
+                <div class="dates">
+                  <span class="date-from">{{project.project.startDate | date: 'MMM yy'}}</span>
+                  <span class="date-span" ng-hide="isNullDate(project.project.endDate)">
+                    - <span class="date-from">{{project.project.endDate | date: 'MMM yy'}}</span>
+                  </span>
+                </div>
+            </div>
         </div>
       </li>
     </ul>
-    </section>  
   </main>
   <footer>
   
   </footer>
   <!-- build:app-js -->
-  <script data-main="js/main.js" src="lib/require.js"></script>
+  <script data-main="js/main.js" src="../bower_components/requirejs/require.js"></script>
   <!-- endbuild -->
 </body>
 </html>

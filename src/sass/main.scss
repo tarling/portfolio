@@ -1,93 +1,43 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700italic,400italic,300italic,300);
 
 $font: 'Roboto Condensed', sans-serif;
-$left-margin: 40px;
+
+@import "listing";
+
 
 body {
-	
-	font-family: $font;
-	background-color: #F6FEFF;
-	
-	header {
-		position: fixed;
-		background-color: #FF5722;
-		display: block;
-		width: 100%;
-		padding: 20px;
-		color: white;
-		padding-left: $left-margin + 20px;
+    font-family: $font;
+    
+    header {
+        padding: 30px;
+        position: fixed;
+        z-index: 2;
+        background-color: rgba(255,255,255,0.8);
+        width: 100%;
+        text-align: center;
+        
+        h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
         
         .filter-menu {
             display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
         }
-	}
-	
-	main {
-		padding-top: 160px;
-	}
-	
-	ul.project-list {
-		padding-left: $left-margin;
-		> li {
-			display: inline-block;
-			width: 280px;
-			margin: 10px;
-			
-			background-color: #FFFFFF;
-			padding: 20px;
-			box-shadow: rgba(0,0,0,0.5) 0px 3px 6px;
-			
-			.name {
-				font-weight: bold;
-			}
-            
-            .img {
-                margin-bottom: 10px;    
-            }
-			
-			.desc {
-				font-weight: 100;
-                margin-bottom: 10px;
-			}
-			
-			.dates {
-				margin-top: 1em;
-			}
-            
-            .client {
-                margin-top: 0.5em;
-            }
-
-            .client, .agency {
-                color: #cccccc;
-            }
-            
-            ul {
-                list-style: none; 
-                padding-left: 0;
-                li {
-                    display: inline-block;
-                    padding: 3px;
-                    border: 1px solid #dddddd;
-                    margin-right: 0.2em;
-                    margin-bottom: 0.2em;
-                }
-            }
-            
-            ul.tech {
-                margin-bottom: 0.5em;
-                li {
-                    border-radius: 8px;
-                    background-color: #cccccc;
-                }
-            }
-            
-            ul.type {
-              margin-bottom: 0.5em;    
-            }
-		}
-	}
-	
-	
+        
+        
+    }
+    
+    .multiselect-parent {
+        span.glyphicon {
+            margin-right: 10px;
+        }
+    }
+    
+    main {
+        text-align: center;  
+        padding-top: 220px; 
+    }
 }
-
