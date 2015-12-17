@@ -1,19 +1,15 @@
 define(["./app"], function(app){
     
-    function intersects(array1, array2) {
-        return array1.filter(function(n) {
-            return array2.indexOf(n) != -1
-        });   
-    }
-
+    function mapSelections(item){
+        return item.id
+    };
+    
     app.filter('filterBySelection', function(){
-        
-        
         
       return function(projects, selectedTechs, selectedTypes) {
           
-        var techs = selectedTechs.map(function(item){return item.id});
-        var types = selectedTypes.map(function(item){return item.id});
+        var techs = selectedTechs.map(mapSelections);
+        var types = selectedTypes.map(mapSelections);
         
         return projects.filter(function(project){
         

@@ -8,9 +8,9 @@ require.config({
         }
     }
     ,"paths": {
-        "angularjs": "../lib/angular"
-        ,"lodash": "../lib/lodash"
-        ,"angularjs-dropdown-multiselect": "../lib/angularjs-dropdown-multiselect"
+        "angularjs": "../../bower_components/angular/angular.min"
+        ,"lodash": "../../bower_components/lodash/dist/lodash.min"
+        ,"angularjs-dropdown-multiselect": "../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min"
     }
 });
 

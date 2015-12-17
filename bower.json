@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "description": "",
+  "main": "src/main.js",
+  "authors": [
+    "James Tarling <james.tarling@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "requirejs": "~2.1.22",
+    "angularjs-dropdown-multiselect": "~1.5.2"
+  }
+}

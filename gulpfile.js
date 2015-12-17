@@ -31,7 +31,7 @@ gulp.task('rjs', function(cb) {
     cb();
 });
 
-gulp.task('copy', ['copy-html', 'copy-js', 'copy-lib'], function() {
+gulp.task('copy', ['copy-html', 'copy-js'], function() {
   
 });
 
@@ -42,11 +42,6 @@ gulp.task('copy-html', function() {
 
 gulp.task('copy-js', function() {
   gulp.src('./src/js/**/*', copyOptions)
-    .pipe(gulp.dest('./build/'));
-});
-
-gulp.task('copy-lib', function() {
-  gulp.src('./src/lib/**/*', copyOptions)
     .pipe(gulp.dest('./build/'));
 });
 
