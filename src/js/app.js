@@ -1,7 +1,9 @@
 define(["angularjs"
     ,"./constants"
-    ,"angularjs-dropdown-multiselect"],function(angular, constants){
+    ,"angularjs-dropdown-multiselect"
+    ,"angular-animate"
+],function(angular, constants){
 
-    return angular.module(constants.APP_NAME, ['angularjs-dropdown-multiselect']);
+    return angular.module(constants.APP_NAME, ['ngAnimate', 'angularjs-dropdown-multiselect']);
 
 });

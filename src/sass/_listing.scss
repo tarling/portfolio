@@ -1,4 +1,5 @@
-$cell_height: 150px;
+$cell_width: 240px;
+$cell_height: 180px;
 
 .project-list {
     
@@ -8,7 +9,7 @@ $cell_height: 150px;
     
     > li {
         
-        width: 240px;
+        width: $cell_width;
         height: $cell_height;
         overflow: hidden;
         display: inline-block;
@@ -40,6 +41,13 @@ $cell_height: 150px;
         }
         
         &:hover {
+            
+            /*-webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2);*/
+            
+            
             .name {
                 background-color: rgba(255,255,255,0.9);
                 color: rgba(1,1,1,0.9);
@@ -53,95 +61,29 @@ $cell_height: 150px;
         }
         
         
-        &.opened {
-            
-            width: auto;
-            height: auto;
-            z-index: 3;
-            text-align: left;
-            padding: 10px;
-            position: relative;
-            background-color: white;
-            
-            .meta {
-                display: inherit;   
-            }
-            
-            .info {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                background-color: rgba(255,255,255,0.9);
-                padding: 10px;
-                width: 375px;
-            }
-
-            .img {
-                height: auto;
-                overflow-y: visible;
-                
-                .thumb {
-                    display: none;    
-                }
-                .full {
-                    display: inline;    
-                }
-            }
-            
-            .name {
-                text-align: left;
-                position: static;
-                background-color: transparent;
-                color: black;
-                padding: 0;
-                font-weight: bold;
-                margin: 5px 0; 
-            }
-            
-            .desc {
-				font-weight: 100;
-                margin-bottom: 10px;
-			}
-			
-			.dates {
-				margin-top: 1em;
-			}
-            
-            .client {
-                margin-top: 0.5em;
-            }
-
-            .client, .agency {
-                color: #cccccc;
-            }
-            
-            ul {
-                list-style: none; 
-                padding-left: 0;
-                display: inline-block;
-                li {
-                    display: inline-block;
-                    padding: 5px;
-                    border: 1px solid #dddddd;
-                    margin-right: 0.2em;
-                    margin-bottom: 0.2em;
-                }
-            }
-            
-            ul.tech {
-                margin-bottom: 0.5em;
-                li {
-                    border-radius: 8px;
-                    background-color: #cccccc;
-                }
-            }
-            
-            ul.type {
-              margin-bottom: 0.5em;    
-            }
-            
-            
-            
-        }
+        
     }
+}
+
+.project {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.project.ng-enter.ng-enter-active,
+.project.ng-leave {
+    opacity: 1;
+    width: $cell_width;
+    height: $cell_height;
+    overflow: hidden;
+}
+
+.project.ng-leave.ng-leave-active,
+.project.ng-enter {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }

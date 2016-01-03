@@ -77,6 +77,13 @@ define([
             return d.valueOf() == 0;
         }
         
+        function center(el) {
+            var w = $(window);
+            var top = ((w.height() - el.outerHeight()) / 2) + w.scrollTop();
+            var left = ((w.width() - el.outerWidth()) / 2) + w.scrollLeft();
+            el.css({margin:0, top: (top > 0 ? top : 0)+'px', left: (left > 0 ? left : 0)+'px'});
+        }
+        
         var OPENED_CLASS = "opened";
         
         $scope.expand = function(e) {
@@ -84,15 +91,27 @@ define([
             var el = angular.element(domEl);
             
             var has = el.hasClass(OPENED_CLASS);
-            el.parent().find("li").removeClass(OPENED_CLASS);
+            el.parent().find("li").removeClass(OPENED_CLASS).removeAttr("css");
+            
+            
             if (!has)
             {
                 el.addClass(OPENED_CLASS);
              
                 var fullImg = el.find(".full");
-                fullImg.attr("src", fullImg.attr("data-src"));
+                if (!fullImg.attr("src"))
+                {
+                    fullImg.on("load", function(){
+                        center(el);
+                    });
+                    fullImg.attr("src", fullImg.attr("data-src"));
+                } else {
+                    center(el);
+                }
+                //domEl.scrollIntoView({behavior: "smooth"});
                 
-                domEl.scrollIntoView({behavior: "smooth"});
+                
+                
             }
         }
           

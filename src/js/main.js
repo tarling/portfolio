@@ -3,9 +3,12 @@ require.config({
         "angularjs" : {
           exports: "angular"
           , deps: ["jquery"]
-        },
-        "angularjs-dropdown-multiselect" : {
+        }
+        ,"angularjs-dropdown-multiselect" : {
             deps: ["angularjs","lodash"]
+        }
+        ,"angular-animate" : {
+            deps: ["angularjs"]
         }
     }
     ,"paths": {
@@ -13,6 +16,7 @@ require.config({
         ,"jquery": "../../bower_components/jquery/dist/jquery.min"
         ,"lodash": "../../bower_components/lodash/dist/lodash.min"
         ,"angularjs-dropdown-multiselect": "../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min"
+        ,"angular-animate": "../../bower_components/angular-animate/angular-animate.min"
     }
 });
 

@@ -19,7 +19,7 @@
   </header>
   <main>
     <ul ng-controller="listController" class="project-list" ng-show="projects.length">
-       <li ng-repeat="project in projects | filterBySelection: selectedTechs : selectedTypes" ng-click="expand($event)">
+       <li class="project" ng-animate="'animate'" ng-repeat="project in projects | filterBySelection: selectedTechs : selectedTypes" ng-click="expand($event)">
         <div class="img">
             <img class="thumb" ng-src="thumbnails/{{project.images[0]}}.jpg">
             <img class="full" data-src="images/{{project.images[0]}}.png">
