@@ -46,76 +46,36 @@ define([
           
           
     }]);
-    
-    app.controller(
-		"filtersController",
-		['$scope', function($scope){
-	
-        $scope.filterOptions = {displayProp: 'name', dynamicTitle: false, idProp: 'name', scrollable: true};
 
-        $scope.techFilterTexts = {buttonDefaultText: 'Technologies'};
-        $scope.typeFilterTexts = {buttonDefaultText: 'Types'};
-            
-        $scope.$on(constants.READY, function(){
-            $scope.$parent.selectedTechs = $scope.technologies.map(function(item){return {id:item.name}});
-            $scope.$parent.selectedTypes = $scope.types.map(function(item){return {id:item.name}});
-            
-            console.log("$scope.selectedTechs", $scope.$parent.selectedTechs);
-            console.log("$scope.selectedTypes", $scope.$parent.selectedTypes);
-        });
-		
-    }]);
-    
-    
     app.controller(
 		"listController",
 		['$scope', function($scope){
-	
-        $scope.isNullDate = function(d) {
-            //console.log("isNullDate", d, d.valueOf(), d.valueOf() == 0);
-            return d.valueOf() == 0;
-        }
-        
-        function center(el) {
-            var w = $(window);
-            var top = ((w.height() - el.outerHeight()) / 2) + w.scrollTop();
-            var left = ((w.width() - el.outerWidth()) / 2) + w.scrollLeft();
-            el.css({margin:0, top: (top > 0 ? top : 0)+'px', left: (left > 0 ? left : 0)+'px'});
-        }
-        
-        var OPENED_CLASS = "opened";
-        
-        $scope.expand = function(e) {
-            var domEl = e.currentTarget;
-            var el = angular.element(domEl);
-            
-            var has = el.hasClass(OPENED_CLASS);
-            el.parent().find("li").removeClass(OPENED_CLASS).removeAttr("css");
-            
-            
-            if (!has)
-            {
-                el.addClass(OPENED_CLASS);
-             
-                var fullImg = el.find(".full");
-                if (!fullImg.attr("src"))
-                {
-                    fullImg.on("load", function(){
-                        center(el);
-                    });
-                    fullImg.attr("src", fullImg.attr("data-src"));
-                } else {
-                    center(el);
-                }
-                //domEl.scrollIntoView({behavior: "smooth"});
-                
-                
-                
+
+            $scope.isNullDate = function(d) {
+                return d.valueOf() == 0;
             }
-        }
-          
-          
-            
+
+            $scope.showDetails = function(project) {
+
+                console.log("item clicked", project);
+
+                console.log("this", this);
+                console.log("$scope", $scope);
+
+                $scope.$parent.project = project;
+
+                $("#portfolioModal").modal();
+
+            }
+    }]);
+
+    app.controller(
+		"modalController",
+		['$scope', function($scope){
+
+            $scope.isNullDate = function(d) {
+                return d ? d.valueOf() == 0 : false;
+            }
     }]);
     
     
