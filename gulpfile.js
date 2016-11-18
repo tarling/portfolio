@@ -31,8 +31,13 @@ gulp.task('rjs', function(cb) {
     cb();
 });
 
-gulp.task('copy', ['copy-html', 'copy-js'], function() {
+gulp.task('copy', ['copy-static', 'copy-html', 'copy-js'], function() {
   
+});
+
+gulp.task('copy-static', function() {
+  gulp.src('./static/**')
+    .pipe(gulp.dest('./build/'));
 });
 
 gulp.task('copy-html', function() {
