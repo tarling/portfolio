@@ -7,39 +7,23 @@ define([
         'appController',
         ['$scope', '$http', '$q', function($scope, $http, $q){
           
-          function update() {
+        function update() {
             if(!$scope.$$phase) {
-              $scope.$apply();
+                $scope.$apply();
             }
-          }
-            
-          var p1 = $http.get('json/technologies.json').then(function(response){  
-              $scope.technologies = response.data;
-              return $q.defer();  
-          });
-            
-          var p2 = $http.get('json/types.json').then(function(response){  
-              $scope.types = response.data;
-              return $q.defer();  
-          });
-            
-          var p3 = $http.get('json/projects.json').then(function(response){
+        }
+
+        $http.get('json/projects.json').then(function(response){
             $scope.projects = response.data.map(function(item){
                 item.project.startDate = new Date(item.project.startDate);
-				item.project.endDate = new Date(item.project.endDate);
+                item.project.endDate = new Date(item.project.endDate);
                 return item;
             });
-            return $q.defer();
-          });
-            
-          $q.all([p1,p2,p3]).then(function(){
-            console.log("all done");
-              
             $scope.$broadcast(constants.READY);
-              
+
             update();
-          });
-            
+        });
+
         $scope.selectedTechs = [];
         $scope.selectedTypes = [];
         $scope.projects = [];

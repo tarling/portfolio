@@ -2,3 +2,9 @@ node_modules
 stock_analyzer
 archive
 bower_components
+videos
+assets
+data
+build
+ftp.json
+dist

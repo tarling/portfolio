@@ -33,7 +33,7 @@ define([
     })
 
     // Floating label headings for the contact form
-    $(function() {
+    /*$(function() {
         $("body").on("input propertychange", ".floating-label-form-group", function(e) {
             $(this).toggleClass("floating-label-form-group-with-value", !!$(e.target).val());
         }).on("focus", ".floating-label-form-group", function() {
@@ -41,5 +41,5 @@ define([
         }).on("blur", ".floating-label-form-group", function() {
             $(this).removeClass("floating-label-form-group-with-focus");
         });
-    });
+    });*/
 })
