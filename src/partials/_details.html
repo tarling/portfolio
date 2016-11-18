@@ -1,0 +1,45 @@
+<!-- Portfolio Modals -->
+<div class="portfolio-modal" tabindex="-1" ng-cloak>
+    <div class="modal-content">
+        <div class="close-modal" ng-click="goBack()">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>{{project.project.name}}</h2>
+                        <hr class="star-primary">
+                        <img ng-src="images/{{project.images[0]}}.png" class="img-responsive img-centered" alt="">
+                        <p>{{project.project.description}}</p>
+                        <ul class="list-inline item-details">
+                            <li ng-show="project.clientId > 0">Client:
+                                <strong>{{project.clientName}}</strong>
+                            </li>
+                            <li>For:
+                                <strong>{{project.agencyName}}</strong>
+                            </li>
+                            <li>Date:
+                                <strong>{{project.project.startDate | date: 'MMM yy'}}
+                                <span ng-hide="isNullDate(project.project.endDate)">
+                                - {{project.project.endDate | date: 'MMM yy'}}
+                                </span>
+                                </strong>
+                            </li>
+                            <li>Technologies:
+                                <strong><ul class="tech list-inline">
+                                    <li ng-repeat="tech in project.technologies">
+                                        {{tech}}
+                                    </li>
+                                </ul></strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

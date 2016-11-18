@@ -60,7 +60,7 @@ gulp.task('copy-static', function() {
 });
 
 gulp.task('copy-html', function() {
-  gulp.src('./src/index.html', copyOptions)
+  gulp.src(['./src/index.html', './src/partials/**'], copyOptions)
     .pipe(gulp.dest(output));
 });
 
@@ -78,7 +78,7 @@ gulp.task('sass', function () {
 gulp.task('watch', function () {
   gulp.watch('./src/sass/**/*.scss', ['sass']);
   gulp.watch('./src/js/**', ['copy-js']);
-  gulp.watch('./src/index.html', ['copy-html']);
+  gulp.watch(['./src/index.html', './src/partials/**'], ['copy-html']);
 });
 
 gulp.task('set-dist-path', function(cb){

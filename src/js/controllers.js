@@ -4,62 +4,41 @@ define([
 ],function(app, constants){
     
     app.controller(
-        'appController',
+        constants.appController,
         ['$scope', '$http', '$q', function($scope, $http, $q){
           
-        function update() {
-            if(!$scope.$$phase) {
-                $scope.$apply();
+        $scope.$on('$routeChangeSuccess', function(event, newVal, oldVal) {
+            if (oldVal !== newVal) {
+                //when route changes, add class to body
+                $scope.routeClassName = $route.current.bodyClass;
             }
-        }
-
-        $http.get('json/projects.json').then(function(response){
-            $scope.projects = response.data.map(function(item){
-                item.project.startDate = new Date(item.project.startDate);
-                item.project.endDate = new Date(item.project.endDate);
-                return item;
-            });
-            $scope.$broadcast(constants.READY);
-
-            update();
         });
-
-        $scope.selectedTechs = [];
-        $scope.selectedTypes = [];
-        $scope.projects = [];
           
           
     }]);
 
     app.controller(
-		"listController",
-		['$scope', function($scope){
+		constants.listController,
+		['$scope', 'projects', function($scope, projects){
 
-            $scope.isNullDate = function(d) {
-                return d.valueOf() == 0;
-            }
-
-            $scope.showDetails = function(project) {
-
-                console.log("item clicked", project);
-
-                console.log("this", this);
-                console.log("$scope", $scope);
-
-                $scope.$parent.project = project;
-
-                $("#portfolioModal").modal();
-
-            }
+            $scope.projects = projects;
     }]);
 
     app.controller(
-		"modalController",
-		['$scope', function($scope){
+		constants.detailsController,
+		['$scope', '$routeParams','$location', 'projects', function($scope, $routeParams, $location, projects){
 
             $scope.isNullDate = function(d) {
                 return d ? d.valueOf() == 0 : false;
             }
+
+            //itemIdx is defined in routes configuration
+			$scope.project = projects[$routeParams.itemIdx];
+			
+			$scope.goBack = function() {
+                console.log("hey");
+				$location.path('list');
+			}
     }]);
     
     
