@@ -133,7 +133,7 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
+                        <img ng-src="thumbnails/{{project.images[0]}}.jpg" class="img-responsive" alt="">
                     </a>
                 </div>
             </div>
@@ -213,13 +213,13 @@
                         <div class="modal-body">
                             <h2>{{project.project.name}}</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                            <img ng-src="images/{{project.images[0]}}.png" class="img-responsive img-centered" alt="">
                             <p>{{project.project.description}}</p>
                             <ul class="list-inline item-details">
                                 <li ng-show="project.clientId > 0">Client:
-                                    <strong>for {{project.clientName}}</strong>
+                                    <strong>{{project.clientName}}</strong>
                                 </li>
-                                <li>{{project.clientId == "0" ? "For" : "With"}}:
+                                <li>For:
                                     <strong>{{project.agencyName}}</strong>
                                 </li>
                                 <li>Date:
