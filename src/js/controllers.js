@@ -29,7 +29,6 @@ define([
 				item.project.endDate = new Date(item.project.endDate);
                 return item;
             });
-            console.log("projects", $scope.projects);
             return $q.defer();
           });
             
@@ -41,9 +40,9 @@ define([
             update();
           });
             
-            $scope.selectedTechs = [];
-            $scope.selectedTypes = [];
-            $scope.projects = [];
+        $scope.selectedTechs = [];
+        $scope.selectedTypes = [];
+        $scope.projects = [];
           
           
     }]);
