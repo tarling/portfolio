@@ -7,10 +7,25 @@ define([
         constants.appController,
         ['$scope', '$route', function($scope, $route){
           
+        var lastY;
+
         $scope.$on('$routeChangeSuccess', function(event, newVal, oldVal) {
             if (oldVal !== newVal) {
                 //when route changes, add class to body
                 $scope.routeClassName = $route.current.bodyClass;
+
+                console.log("new", newVal);
+
+                if ($route.current.bodyClass == 'details')
+                {
+                    lastY = $(window).scrollTop();
+                    $(window).scrollTop($("#view").offset().top - $("#mainNav").outerHeight());
+                } else {
+                    if (lastY !== undefined)
+                    {
+                        $(window).scrollTop(lastY);
+                    }
+                }
             }
         });
           
