@@ -1,5 +1,31 @@
+@import "variables.scss";
+
+$skills-bg: #ba4c63;
+
+header p:first-child {
+    margin-bottom: 1.5em;
+}
+
 .item-details {
     .tech {
         display: inline-block;
+    }
+}
+
+#skills {
+    background-color: $skills-bg;
+	color: white;
+
+    hr.star-light:after {
+        background-color: $skills-bg;
+    }
+
+    ul {
+        list-style: none;
+        font-size: 2em;
+
+        li {
+            text-align: center;
+        }
     }
 }
