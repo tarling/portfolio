@@ -13,6 +13,9 @@ require.config({
         ,"angular-route" : {
             deps: ["angularjs"]
         }
+        ,"angular-sanitize" : {
+            deps: ["angularjs"]
+        }
     }
     ,"paths": {
         "requireLib": "../../bower_components/requirejs/require"
@@ -20,7 +23,8 @@ require.config({
         ,"angular-route": "../../bower_components/angular-route/angular-route"
         ,"jquery": "../../bower_components/jquery/dist/jquery.min"
         ,"bootstrap": "../../bower_components/bootstrap/dist/js/bootstrap.min"
-        ,"jquery.easing": "../..//bower_components/jquery.easing/js/jquery.easing.min"
+        ,"jquery.easing": "../../bower_components/jquery.easing/js/jquery.easing.min"
+        ,"angular-sanitize": "../../bower_components/angular-sanitize/angular-sanitize.min"
     }
 });
 
@@ -31,6 +35,7 @@ require( [
     ,"./constants"
     ,"./controllers"
     ,"./data-service"
+    ,"./filters"
     ,"./freelancer"
     ,"./routes"
   ], function(angular, $, app, constants) {

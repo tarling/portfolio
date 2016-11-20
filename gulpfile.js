@@ -50,7 +50,7 @@ gulp.task('convert-html', function() {
     .pipe(gulp.dest(output));
 });
 
-gulp.task('copy', ['copy-static', 'copy-html', 'copy-js'], function() {
+gulp.task('copy', ['copy-static', 'copy-html', 'copy-partials', 'copy-js'], function() {
   
 });
 
@@ -60,7 +60,12 @@ gulp.task('copy-static', function() {
 });
 
 gulp.task('copy-html', function() {
-  gulp.src(['./src/index.html', './src/partials/**'], copyOptions)
+  gulp.src('./src/index.html', copyOptions)
+    .pipe(gulp.dest(output));
+});
+
+gulp.task('copy-partials', function() {
+  gulp.src('./src/partials/**', copyOptions)
     .pipe(gulp.dest(output));
 });
 
@@ -78,7 +83,8 @@ gulp.task('sass', function () {
 gulp.task('watch', function () {
   gulp.watch('./src/sass/**/*.scss', ['sass']);
   gulp.watch('./src/js/**', ['copy-js']);
-  gulp.watch(['./src/index.html', './src/partials/**'], ['copy-html']);
+  gulp.watch('./src/index.html', ['copy-html']);
+  gulp.watch('./src/partials/**', ['copy-partials']);
 });
 
 gulp.task('set-dist-path', function(cb){
@@ -89,8 +95,8 @@ gulp.task('set-dist-path', function(cb){
 gulp.task('dist', function () {
   runSequence(
     'set-dist-path',
-    ['copy-static', 'sass', 'rjs', 'convert-html'],
-    'ftp-all'
+    ['copy-static', 'sass', 'rjs', 'convert-html', 'copy-partials'],
+    'ftp-code'
   );
 });
 
@@ -113,11 +119,32 @@ function makeFtpConn() {
 
 gulp.task('ftp-all', function(){
     var conn = makeFtpConn();
+    var path = './dist/';
 
     // using base = '.' will transfer everything to /public_html correctly
     // turn off buffering in gulp.src for best performance
 
-    return gulp.src( output + "**/*", { base: output, buffer: false } )
+    return gulp.src( path + "**/*", { base: path, buffer: false } )
+        .pipe( conn.newer( ftpCreds.homeDir ) ) // only upload newer files
+        .pipe( conn.dest( ftpCreds.homeDir ) );
+});
+
+gulp.task('ftp-code', function(){
+    var conn = makeFtpConn();
+    var path = './dist/';
+
+    var globs = [
+      path + 'css/**/*',
+      path + 'json/**/*',
+      path + 'partials/**/*',
+      path + 'app.js',
+      path + 'index.html'
+    ]
+
+    // using base = '.' will transfer everything to /public_html correctly
+    // turn off buffering in gulp.src for best performance
+
+    return gulp.src( globs, { base: path, buffer: false } )
         .pipe( conn.newer( ftpCreds.homeDir ) ) // only upload newer files
         .pipe( conn.dest( ftpCreds.homeDir ) );
 });

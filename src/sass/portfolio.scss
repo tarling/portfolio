@@ -23,10 +23,17 @@ header p:first-child {
     ul {
         list-style: none;
         font-size: 2em;
+        padding-left: 0;
 
         li {
             text-align: center;
         }
+    }
+}
+
+.portfolio-item {
+    img {
+        margin: auto;
     }
 }
 

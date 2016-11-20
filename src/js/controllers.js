@@ -14,12 +14,16 @@ define([
                 //when route changes, add class to body
                 $scope.routeClassName = $route.current.bodyClass;
 
-                console.log("new", newVal);
-
                 if ($route.current.bodyClass == 'details')
                 {
                     lastY = $(window).scrollTop();
-                    $(window).scrollTop($("#view").offset().top - $("#mainNav").outerHeight());
+                    
+                    var viewEl = $("#view");
+                    if (viewEl.length)
+                    {
+                        $(window).scrollTop(viewEl.offset().top - $("#mainNav").outerHeight());
+                    }
+                    
                 } else {
                     if (lastY !== undefined)
                     {
@@ -51,8 +55,7 @@ define([
 			$scope.project = projects[$routeParams.itemIdx];
 			
 			$scope.goBack = function() {
-                console.log("hey");
-				$location.path('list');
+                $location.path('list');
 			}
     }]);
     
