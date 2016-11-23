@@ -44,7 +44,7 @@ module.exports = function(db_) {
         innerJoin(type, type.id.eq(ptype.type)).
         innerJoin(pi, pi.project.eq(p.id)).
         where(p.show.eq(true)).
-        orderBy(p.startDate, lf.Order.DESC).
+        orderBy(p.endDate, lf.Order.DESC).
         groupBy(p.id);
     } catch(e) {
         console.error(e);
