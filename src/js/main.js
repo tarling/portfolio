@@ -1,6 +1,6 @@
 require.config({
     "shim" : {
-        "angularjs" : {
+        "angular" : {
           exports: "angular"
           , deps: ["jquery"]
         }
@@ -11,35 +11,32 @@ require.config({
             deps: ["jquery"]
         }
         ,"angular-route" : {
-            deps: ["angularjs"]
+            deps: ["angular"]
         }
         ,"angular-sanitize" : {
-            deps: ["angularjs"]
+            deps: ["angular"]
         }
     }
     ,"paths": {
         "requireLib": "../../bower_components/requirejs/require"
-        ,"angularjs": "../../bower_components/angular/angular.min"
+        ,"angular": "../../bower_components/angular/angular.min"
         ,"angular-route": "../../bower_components/angular-route/angular-route"
+        ,"angular-sanitize": "../../bower_components/angular-sanitize/angular-sanitize.min"
         ,"jquery": "../../bower_components/jquery/dist/jquery.min"
         ,"bootstrap": "../../bower_components/bootstrap/dist/js/bootstrap.min"
         ,"jquery.easing": "../../bower_components/jquery.easing/js/jquery.easing.min"
-        ,"angular-sanitize": "../../bower_components/angular-sanitize/angular-sanitize.min"
     }
 });
 
 require( [
-    "angularjs"
+    "angular"
     ,"jquery"
-    ,"./app"
-    ,"./constants"
-    ,"./controllers"
-    ,"./data-service"
-    ,"./filters"
-    ,"./freelancer"
-    ,"./routes"
-  ], function(angular, $, app, constants) {
-        
-    angular.bootstrap(document, [constants.APP_NAME]);
+    ,"./app.module"
+    ,"./app.config"
+    ,"./app.controller"
+    ,"./core/format-description/format-description.filter"
+  ], function(angular, $, app) {
+
+    angular.bootstrap(document, [app.name]);
     
   });

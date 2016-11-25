@@ -7,9 +7,9 @@
                 <hr class="star-primary">
             </div>
         </div>
-        <div class="row" ng-show="projects.length" ng-cloak>
-            <div class="col-sm-4 portfolio-item" ng-repeat="project in projects">
-                <a href="#/details/{{projects.indexOf(project)}}" class="portfolio-link">
+        <div class="row" ng-show="$ctrl.projects.length">
+            <div class="col-sm-4 portfolio-item" ng-repeat="project in $ctrl.projects">
+                <a href="#/details/{{$ctrl.projects.indexOf(project)}}" class="portfolio-link">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>

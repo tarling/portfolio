@@ -1,7 +1,7 @@
 <!-- Portfolio Modals -->
 <div class="portfolio-modal" tabindex="-1" ng-cloak>
     <div class="modal-content">
-        <div class="close-modal" ng-click="goBack()">
+        <div class="close-modal" ng-click="$ctrl.goBack()">
             <div class="lr">
                 <div class="rl">
                 </div>
@@ -11,28 +11,28 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        <h2>{{project.project.name}}</h2>
+                        <h2>{{$ctrl.project.project.name}}</h2>
                         <hr class="star-primary">
-                        <img ng-src="images/{{project.images[0]}}.png" class="img-responsive img-centered" alt="">
-                        <p ng-bind-html="project.project.description | formatDescription"></p>
+                        <img ng-src="images/{{$ctrl.project.images[0]}}.png" class="img-responsive img-centered" alt="">
+                        <p ng-bind-html="$ctrl.project.project.description | formatDescription"></p>
                         <ul class="list-inline item-details">
                             <li ng-show="project.clientId > 0">Client:
-                                <strong>{{project.clientName}}</strong>
+                                <strong>{{$ctrl.project.clientName}}</strong>
                             </li>
                             <li>For:
-                                <strong>{{project.agencyName}}</strong>
+                                <strong>{{$ctrl.project.agencyName}}</strong>
                             </li>
                             <li>Date:
-                                <strong>{{project.project.startDate | date: 'MMM yy'}}
-                                <span ng-hide="isNullDate(project.project.endDate)">
-                                - {{project.project.endDate | date: 'MMM yy'}}
+                                <strong>{{$ctrl.project.project.startDate | date: 'MMM yy'}}
+                                <span ng-hide="$ctrl.isNullDate($ctrl.project.project.endDate)">
+                                - {{$ctrl.project.project.endDate | date: 'MMM yy'}}
                                 </span>
                                 </strong>
                             </li>
                             <li>Technologies:
                                 <strong><ul class="tech list-inline">
-                                    <li ng-repeat="tech in project.technologies">
-                                        {{tech}}
+                                    <li ng-repeat="tech in $ctrl.project.technologies">
+                                        {{$ctrl.tech}}
                                     </li>
                                 </ul></strong>
                             </li>

@@ -1,14 +1,12 @@
 define([
-    "./app"
-    , "./constants"
-],function(app, constants){
+    "./app.module"
+],function(app){
     
     app.controller(
-        constants.appController,
+        'AppController',
         ['$scope', '$route', function($scope, $route){
           
         var lastY;
-
         $scope.$on('$routeChangeSuccess', function(event, newVal, oldVal) {
             if (oldVal !== newVal) {
                 //when route changes, add class to body
@@ -34,29 +32,6 @@ define([
         });
           
           
-    }]);
-
-    app.controller(
-		constants.listController,
-		['$scope', 'projects', function($scope, projects){
-
-            $scope.projects = projects;
-    }]);
-
-    app.controller(
-		constants.detailsController,
-		['$scope', '$routeParams','$location', 'projects', function($scope, $routeParams, $location, projects){
-
-            $scope.isNullDate = function(d) {
-                return d ? d.valueOf() == 0 : false;
-            }
-
-            //itemIdx is defined in routes configuration
-			$scope.project = projects[$routeParams.itemIdx];
-			
-			$scope.goBack = function() {
-                $location.path('list');
-			}
     }]);
     
     
