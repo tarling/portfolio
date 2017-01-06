@@ -5,10 +5,11 @@
             <div class="col-lg-12 text-center">
                 <h2>Portfolio</h2>
                 <hr class="star-primary">
+                <project-filters></project-filters>
             </div>
         </div>
         <div class="row" ng-show="$ctrl.projects.length">
-            <div class="col-sm-4 portfolio-item" ng-repeat="project in $ctrl.projects">
+            <div class="col-sm-4 portfolio-item" ng-repeat="project in $ctrl.projects | filterBySelection: $ctrl.selectedTechs : $ctrl.selectedTypes">
                 <a href="#/details/{{$ctrl.projects.indexOf(project)}}" class="portfolio-link">
                     <div class="caption">
                         <div class="caption-content">

@@ -8,14 +8,20 @@ define([
     controller: ['Project','Technology', 'Type',
       function(Project, Technology, Type) {
         var self = this;
-        Project.get().then(function(projects){
+        Project.all().then(function(projects){
           self.projects = projects;
         });
-        Technology.get().then(function(technologies){
+        Technology.all().then(function(technologies){
           self.technologies = technologies;
+          self.selectedTechs = technologies.map(function(item){
+              return {id:item.name}
+          });
         });
-        Type.get().then(function(types){
+        Type.all().then(function(types){
           self.types = types;
+          self.selectedTypes = types.map(function(item){
+              return {id:item.name}
+          });
         });
       }
     ]

@@ -40,3 +40,28 @@ header p:first-child {
 .footer-above {
     padding-bottom: 3em;
 }
+
+.filters {
+
+    margin-bottom: 2em;
+
+    .filter-menu {
+        display: inline-block;
+
+        button {
+            font-size: 1.3em;
+            padding: 0.7em;
+        }
+
+        li {
+            font-size: 1.2em;
+            .glyphicon {
+                margin-right: 0.5em;
+            }
+        }
+
+        
+    }
+}
+
+

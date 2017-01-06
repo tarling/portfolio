@@ -4,7 +4,7 @@ define([
 
     module.filter('formatDescription', ['$filter', function($filter){
       return function(desc) {
-        return desc.replace(/\n/gi, '</p><p>');
+        return desc ? desc.replace(/\n/gi, '</p><p>') : '';
       }
     }]);
 

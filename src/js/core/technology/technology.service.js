@@ -5,19 +5,19 @@ define([
     module.
     factory('Technology', ['$http', '$q', 
         function($http, $q) {
-            var technologies;
+            var list;
             return {
-                get:function(){
-                    if (technologies)
+                all:function(){
+                    if (list)
                     {
                         //if items has already been defined, reuse it
                         var deferred = $q.defer();
-                        deferred.resolve(technologies);
+                        deferred.resolve(list);
                         return deferred.promise;
                     } else {
                         return $http.get('json/technologies.json').then(function(response){
-                            technologies = response.data;
-                            return technologies;
+                            list = response.data;
+                            return list;
                         });
                     }
                 }

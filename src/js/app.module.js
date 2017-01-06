@@ -4,7 +4,7 @@ define(["angular"
     ,"./core/core.module"
     ,"./project-details/project-details.component"
     ,"./project-list/project-list.component"
-
+    ,"./project-filters/project-filters.component"
 ],function(angular){
 
     return angular.module('PortfolioApp', [
@@ -12,6 +12,7 @@ define(["angular"
         'ngSanitize',
         'core',
         'projectList',
-        'projectDetails'
+        'projectDetails',
+        'projectFilters'
     ]);
 });

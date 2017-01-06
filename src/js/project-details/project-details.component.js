@@ -12,7 +12,7 @@ define([
         }
 
         var self = this;
-        Project.get()
+        Project.all()
         .then(function(projects){
             self.project = projects[$routeParams.itemIdx]
         })

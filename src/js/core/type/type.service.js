@@ -5,19 +5,19 @@ define([
     module.
     factory('Type', ['$http', '$q', 
         function($http, $q) {
-            var types;
+            var list;
             return {
-                get:function(){
-                    if (types)
+                all:function(){
+                    if (list)
                     {
                         //if items has already been defined, reuse it
                         var deferred = $q.defer();
-                        deferred.resolve(types);
+                        deferred.resolve(list);
                         return deferred.promise;
                     } else {
                         return $http.get('json/types.json').then(function(response){
-                            types = response.data;
-                            return types;
+                            list = response.data;
+                            return list;
                         });
                     }
                 }
