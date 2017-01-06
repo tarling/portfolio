@@ -1,1 +1,0 @@
-http://stackoverflow.com/questions/13762228/confused-about-service-vs-factory
